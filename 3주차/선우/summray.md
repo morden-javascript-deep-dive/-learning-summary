@@ -3,8 +3,7 @@
 ## 10.1 객체란?
 
 - 자바스크립트는 객체(object) 기반의 프로그래밍 언어
-    - 원시값을 제외한 나머지 값(함수, 배열, 정규 표현식 등)은 모두 객체
-- 원시타입 VS 객체타입
+- 데이터 타입 = 원시타입 + 객체타입
     - 원시타입: 단 하나의 값만 나타냄 → 변경 불가능한 값
     - 객체타입: 다양한 타입의 값(원시 값 또는 다른 객체)을 하나의 단위로 구성한 자료구조 → 변경 가능한 값
 - 객체란?
@@ -29,15 +28,10 @@
         }
         ```
         
-- 정리
-    - `객체` = 프로터티 + 메서드로 구성된 집합
-        - 객체의 상태를 나타내는 값과 프로퍼티를 참조하고 조작할 수 있는 동작을 모두 포함할 수 있기 때문에 상태와 동작을 하나의 단위로 구조화 할 수 있어 유용
-    - `프로퍼티`: 객체의 상태를 나타내는 값(data)
-    - `메서드`: 프로퍼티(상태 데이터)를 참조하고 조직할 수 있는 동작(behavior)
-- 자바스크립트의 객체는 함수와 밀접한 관계를 가진다.
-    - JavaScript가 함수를 '일급 객체'로 취급하기 때문에, 함수를 변수에 할당하거나 다른 함수에 전달할 수 있음을 의미합니다.
+- JS는 함수를 '일급 객체'로 취급하기 때문에, 함수를 변수에 할당하거나 다른 함수에 전달할 수 있음을 의미합니다.
+- 함수로 객체 생성하는 방법
     
-    1) 함수로 객체를 생성하기(생성자 함수): 
+    1) 생성자 함수: 
     
     생성자 함수를 사용하여 새로운 객체를 만들 때는 new 키워드를 사용
     
@@ -55,7 +49,9 @@
     
      
     
-    2) 함수 자체가 객체: 자바스크립트에서 함수는 객체. 함수가 프로퍼티와 메서드를 가질 수 있고, 다른 변수에 할당되거나 다른 함수의 인수로 전달될 수 있음
+    2) 함수 자체가 객체: 
+    
+    JS의 함수는 일급객체. 다른 변수에 할당되거나 다른 함수의 인수로 전달될 수 있음
     
     ```jsx
     // 함수를 변수에 할당
@@ -81,9 +77,9 @@
         - 함수이용: Object 생성자 함수, 생성자 함수, Object.create 메서드, 클래스(ES6)
 - 객체 리터럴이란?
     - 중괄호 {…} 내에 0개 이상의 프로퍼티를 정의
-    - 변수에 할당되는 시점에 자바스크립트 엔진은 객체 리터럴을 해석해 객체를 생성
+    - 변수에 할당되는 시점에 (JS 엔진은 객체 리터럴을 해석해) 객체를 생성
     - 중괄호 내에 프로퍼티 정의하지 않으면({ }) 빈 객체 생성
-    - 장점: 클래스를 먼저 정의하고 new 연산자와 함께 생성자를 호출할 필요없이 바로 리터럴로 객체를 생성할 수 있음 → 자바스크립트의 유연함과 강력함
+    - 장점: 클래스를 먼저 정의하고 new 연산자와 함께 생성자를 호출할 필요없이 바로 리터럴로 객체를 생성할 수 있음
     
     ```jsx
     var person = {
@@ -105,7 +101,7 @@
 - 객체 리터럴 VS 코드블럭
     - 객체 리터럴은 코드 블럭이 아니다. 하나의 객체로 평가되는 표현식이기에 뒤에 세미콜론(;)을 붙임
 
-## 10.3프로퍼티
+## 10.3 프로퍼티
 
 - 프로퍼티의 구성
     - 프로퍼티 키: 빈 문자열을 포함하는 모든 문자열 또는 심벌 값
@@ -172,7 +168,9 @@ console.log(person[name]); //ReferenceError: name is not defined
 
 즉, 객체에 존재하지 않는 프로퍼티에 접근하면 undefined를 반환함.
 
-- 의문점??: 객체에 존재하지 않는 프로퍼티인데 ReferenceError가 아닌 undefined를 반환?
+- 의문점)
+    - 객체에 존재하지 않는 프로퍼티인데 ReferenceError가 아닌 undefined를 반환?
+    - 메모리 공간을 할당하여 따로 undefined로 초기화되지도 않았음에도…!
     
     ```jsx
     var person = {
@@ -180,7 +178,7 @@ console.log(person[name]); //ReferenceError: name is not defined
     	age: 30
     };
     
-    console.log(person.address); // undefined
+    console.log(person.address); // undefined 특수 케이스
     console.log(nonExistentVariable); // ReferenceError: nonExistentVariable is not defined
     ```
     
@@ -199,17 +197,17 @@ console.log(person[name]); //ReferenceError: name is not defined
     
     - node.js 환경에서의 person.last-name
         
-        1) person.last 를 평가. person에는 last라는 객체가 없기에, person.last는 undefined
+        1) person.last 를 평가. person에는 last라는 객체가 없기에, person.last는 `undefined`
         
         2) 그러면, undefined -name과 같아진다
         
         3) 자바스크립트 엔진이 name이라는 식별자를 찾는다.(키가 아니라 식별자(변수, 함수..)를 찾음)
         
-        4) node.js는 name이라는 식별자가 없으므로, name is noe defined가 뜸
+        4) node.js는 name이라는 식별자가 없으므로, name is not defined가 뜸
         
     - 브라우저 환경에서의 person.last-name
         
-        1) person.last 를 평가. person에는 last라는 객체가 없으므로, person.last는 undefined
+        1) person.last 를 평가. person에는 last라는 객체가 없으므로, person.last는 `undefined`
         
         2) 그러면, undefined -name과 같아짐.
         
@@ -300,7 +298,7 @@ console.log(name); // {lastName: "Hong"}
     ```
     
 
-### 10.9.2 계산된 프로퍼티 이름
+### 10.9.2 계산된 프로퍼티 키의 이름
 
 - 문자열 또는 문자열로 타입 변환할 수 있는 값으로 평가되는 표현식을 사용해 프로퍼티 키를 동적으로 생성할 수 있음
 - 단, 프로퍼티 키로 사용할 표현식을 대괄호([ … ])로 묶어야 함
@@ -354,18 +352,6 @@ obj.sayHi(); // Hi! Hong
 ```
 
 - function 키워드를 생략한 축약 표현 사용 가능
-
-```jsx
-// ES6
-const obj = {
-	name: 'Hong',
-	sayHi() {
-		console.log('Hi! '+this.name);
-	}
-};
-
-obj.sayHi();  // Hi! Hong
-```
 ---
 # 11장. 원시값과 객체의 비교
 
