@@ -393,9 +393,7 @@ obj.sayHi(); // Hi! Hong
     2) 재할당한 원시 값 저장
     
     3) 식별자(score)가 새롭게 재할당한 원시 값의 주소로 옮김
-    
-
-![스크린샷 2024-04-27 오후 1.35.06.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b278eae5-15fb-42de-a493-229718a0b327/9f009956-d1a7-423c-a688-2bc05b7cf841/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-27_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_1.35.06.png)
+    <img width="762" alt="스크린샷 2024-04-27 오후 2 15 49" src="https://github.com/morden-javascript-deep-dive/learning-summary/assets/117020232/2ce220bd-d50d-4f90-854d-d40fbc7bc62b">
 
 (불변성을 갖는 원시 값을 할당한 변수는 재할당 이외의 변수 값을 변경할 수 있는 방법이 없다 → 만약 재할당 이외에 원시값인 변수 값을 변경할 수 있다면 예기치 않게 변수 값이 변경될 수 있음을 의미 → 문자열에서도 한 문자만 변경 불가능, 무조건 재할당해야지 변경됨
 
@@ -453,10 +451,10 @@ obj.sayHi(); // Hi! Hong
 ### 11.1.2 값에 의한 전달
 
 - A변수(목적지)에 원시 값을 갖는 B변수를 할당하면, B변수의 값이 복사되어 전달됨 = (새로운 공간에 값이 배치되고 이를 가리킴) = 같은 80이지만, 다른 메모리 공간에 저장된 별개의 값 → 값에 의한 전달
+
+  <img width="1390" alt="스크린샷 2024-04-27 오후 1 35 06" src="https://github.com/morden-javascript-deep-dive/learning-summary/assets/117020232/f9e51cb3-da4c-4059-9014-8bca9414a04f">
     
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/b278eae5-15fb-42de-a493-229718a0b327/5455ad0a-2d67-4195-b29c-94403d2ba074/Untitled.png)
-    
-    ```jsx
+```jsx
     var score = 80;
     var copy = score;
     
@@ -467,7 +465,7 @@ obj.sayHi(); // Hi! Hong
     
     console.log(score);  //100
     console.log(copy);  //80
-    ```
+```
     
 - 엄밀하게) 값에 의한 전달X (메모리 주소에 의한 전달O)
     
@@ -500,7 +498,7 @@ obj.sayHi(); // Hi! Hong
         → 편리하지만, 생성과 프로퍼티 접근에 비용이 많이 듦 
         
         → 히든 클래스 방식을 사용해 C++ 객체의 프로퍼티 접근하는 정도의 성능 보장
-        
+      	(참고: https://ui.toast.com/posts/ko_20210909)
         - 장점: 사전형 탐색을 우회 가능
         - 방식:
             - 새 객체를 생성할 때 V8 엔진은 이에 대한 새로운 히든 클래스를 생성
@@ -755,7 +753,7 @@ var f = function add(x, y) {
     
     1) 표현식이 아닌 함수 선언문으로 해석
     
-    2) 표현식인 함수 리터럴 표현식으로 해서
+    2) 표현식인 함수 리터럴 표현식으로 해석
     
     (유일한 차이점이 함수 이름 생략 가능한지임으로 JS 엔진입장에선 혼동의 여지가 있음)
     
